@@ -6,6 +6,8 @@ public class ResourceManager : MonoBehaviour
 {
 	#region Fields
 
+	public static ResourceManager Instance { get; private set; }
+
 	Dictionary<ResourceTypeSO, int> _resourceAmountDict;
 
 	#endregion
@@ -14,6 +16,14 @@ public class ResourceManager : MonoBehaviour
 
 	void Awake() 
 	{
+		if (Instance != null && Instance != this)
+			Destroy(gameObject);
+		else
+		{
+			Instance = this;
+			//DontDestroyOnLoad(gameObject);
+		}
+
 		//initialize the Dictionary
 		_resourceAmountDict = new Dictionary<ResourceTypeSO, int>();
 		//load the ResourceTypeList from Resources folder
@@ -41,6 +51,7 @@ public class ResourceManager : MonoBehaviour
 	public void AddResource(ResourceTypeSO resourceType,int amount)
 	{
 		_resourceAmountDict[resourceType] += amount;
+		TestLogResourceDictionaryAmounts();
 	}
 	#endregion
 

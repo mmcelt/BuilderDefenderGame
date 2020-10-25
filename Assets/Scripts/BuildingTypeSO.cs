@@ -9,6 +9,7 @@ public class BuildingTypeSO : ScriptableObject
 
 	public string _name;
 	public Transform _prefab;
+	public ResourceGeneratorData _resourceData;
 
 	#endregion
 
