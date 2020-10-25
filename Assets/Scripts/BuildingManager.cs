@@ -6,7 +6,8 @@ public class BuildingManager : MonoBehaviour
 {
 	#region Fields
 
-	[SerializeField] Transform _woodHarvesterPrefab;
+	BuildingTypeSO _buildingType;
+	BuildingTypeListSO _buildingTypeList;
 
 	Camera _mainCamera;
 
@@ -17,14 +18,27 @@ public class BuildingManager : MonoBehaviour
 	void Start() 
 	{
 		_mainCamera = Camera.main;
+		_buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+		_buildingType = _buildingTypeList._list[0];
 	}
 	
 	void Update() 
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			Instantiate(_woodHarvesterPrefab, GetMouseWorldPosition(), Quaternion.identity);
+			Instantiate(_buildingType._prefab, GetMouseWorldPosition(), Quaternion.identity);
 		}
+
+		if (Input.GetKeyDown(KeyCode.T))
+		{
+			_buildingType = _buildingTypeList._list[0];
+		}
+
+		if (Input.GetKeyDown(KeyCode.Y))
+		{
+			_buildingType = _buildingTypeList._list[1];
+		}
+
 	}
 	#endregion
 

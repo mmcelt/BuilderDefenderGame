@@ -265,8 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85492e576b18db4b86f869547db3e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _woodHarvesterPrefab: {fileID: 5426507561692046923, guid: 1a48e4451a89af44eb2413ca4eb5eacd,
-    type: 3}
+  _buildingType: {fileID: 11400000, guid: f582c49244f7a684b818907709a46f10, type: 2}
 --- !u!4 &999983227
 Transform:
   m_ObjectHideFlags: 0
