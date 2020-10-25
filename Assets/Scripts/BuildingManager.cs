@@ -15,11 +15,15 @@ public class BuildingManager : MonoBehaviour
 
 	#region MonoBehaviour Methods
 
+	void Awake()
+	{
+		_buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
+		_buildingType = _buildingTypeList._list[0];
+	}
+
 	void Start() 
 	{
 		_mainCamera = Camera.main;
-		_buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
-		_buildingType = _buildingTypeList._list[0];
 	}
 	
 	void Update() 
