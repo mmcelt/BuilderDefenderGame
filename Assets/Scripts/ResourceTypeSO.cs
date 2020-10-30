@@ -8,16 +8,7 @@ public class ResourceTypeSO : ScriptableObject
 	#region Fields
 
 	public string _name;
-
-	#endregion
-
-	#region Public Methods
-
-
-	#endregion
-
-	#region Private Methods
-
+	public Sprite _sprite;
 
 	#endregion
 }

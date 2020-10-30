@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class ResourceManager : MonoBehaviour
 	#region Fields
 
 	public static ResourceManager Instance { get; private set; }
+
+	public event EventHandler OnResourceAmountChanged;
 
 	Dictionary<ResourceTypeSO, int> _resourceAmountDict;
 
@@ -48,10 +51,18 @@ public class ResourceManager : MonoBehaviour
 
 	#region Public Methods
 
-	public void AddResource(ResourceTypeSO resourceType,int amount)
+	public void AddResource(ResourceTypeSO resourceType, int amount)
 	{
 		_resourceAmountDict[resourceType] += amount;
+
+		OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+
 		TestLogResourceDictionaryAmounts();
+	}
+
+	public int GetResourceAmount(ResourceTypeSO resourceType)
+	{
+		return _resourceAmountDict[resourceType];
 	}
 	#endregion
 
