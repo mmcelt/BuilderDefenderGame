@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingManager : MonoBehaviour
 {
 	#region Fields
 
-	BuildingTypeSO _buildingType;
+	public static BuildingManager Instance { get; private set; }
+
+	BuildingTypeSO _activeBuildingType;
 	BuildingTypeListSO _buildingTypeList;
 
 	Camera _mainCamera;
@@ -17,8 +20,13 @@ public class BuildingManager : MonoBehaviour
 
 	void Awake()
 	{
+		if (Instance == null)
+			Instance = this;
+		else if (Instance != this)
+			Destroy(gameObject);
+
 		_buildingTypeList = Resources.Load<BuildingTypeListSO>(typeof(BuildingTypeListSO).Name);
-		_buildingType = _buildingTypeList._list[0];
+		_activeBuildingType = null;
 	}
 
 	void Start() 
@@ -28,27 +36,25 @@ public class BuildingManager : MonoBehaviour
 	
 	void Update() 
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
-			Instantiate(_buildingType._prefab, GetMouseWorldPosition(), Quaternion.identity);
+			if(_activeBuildingType != null)
+				Instantiate(_activeBuildingType._prefab, GetMouseWorldPosition(), Quaternion.identity);
 		}
-
-		if (Input.GetKeyDown(KeyCode.T))
-		{
-			_buildingType = _buildingTypeList._list[0];
-		}
-
-		if (Input.GetKeyDown(KeyCode.Y))
-		{
-			_buildingType = _buildingTypeList._list[1];
-		}
-
 	}
 	#endregion
 
 	#region Public Methods
 
+	public void SetActiveBuildingType(BuildingTypeSO buildingType)
+	{
+		_activeBuildingType = buildingType;
+	}
 
+	public BuildingTypeSO GetActiveBuildingType()
+	{
+		return _activeBuildingType;
+	}
 	#endregion
 
 	#region Private Methods

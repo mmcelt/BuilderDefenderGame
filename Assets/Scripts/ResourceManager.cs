@@ -35,7 +35,7 @@ public class ResourceManager : MonoBehaviour
 		foreach (ResourceTypeSO resourceType in resourceTypeList._list)
 			_resourceAmountDict[resourceType] = 0;
 
-		TestLogResourceDictionaryAmounts();
+		//TestLogResourceDictionaryAmounts();
 	}
 
 	void Update() 
@@ -44,7 +44,7 @@ public class ResourceManager : MonoBehaviour
 		{
 			ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
 			AddResource(resourceTypeList._list[0], 2);
-			TestLogResourceDictionaryAmounts();
+			//TestLogResourceDictionaryAmounts();
 		}
 	}
 	#endregion
@@ -57,7 +57,7 @@ public class ResourceManager : MonoBehaviour
 
 		OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
 
-		TestLogResourceDictionaryAmounts();
+		//TestLogResourceDictionaryAmounts();
 	}
 
 	public int GetResourceAmount(ResourceTypeSO resourceType)
