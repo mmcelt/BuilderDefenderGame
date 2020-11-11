@@ -18,3 +18,5 @@ MonoBehaviour:
   _resourceData:
     _timerMax: 2
     _resourceType: {fileID: 11400000, guid: c9fa50e2317b2164ab4294b3a89e6c38, type: 2}
+    _resourceDetectionRadius: 7
+    _maxResourceAmount: 3
