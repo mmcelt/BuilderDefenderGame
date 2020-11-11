@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,6 +9,13 @@ public class BuildingManager : MonoBehaviour
 	#region Fields
 
 	public static BuildingManager Instance { get; private set; }
+
+	public event EventHandler<OnActiveBuildingTypeChangedEventArgs> OnActiveBuildingTypeChanged;
+
+	public class OnActiveBuildingTypeChangedEventArgs : EventArgs 
+	{
+		public BuildingTypeSO activeBuildingType;
+	}
 
 	BuildingTypeSO _activeBuildingType;
 	BuildingTypeListSO _buildingTypeList;
@@ -39,7 +47,7 @@ public class BuildingManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			if(_activeBuildingType != null)
-				Instantiate(_activeBuildingType._prefab, GetMouseWorldPosition(), Quaternion.identity);
+				Instantiate(_activeBuildingType._prefab, Utils.GetMouseWorldPosition(), Quaternion.identity);
 		}
 	}
 	#endregion
@@ -49,6 +57,8 @@ public class BuildingManager : MonoBehaviour
 	public void SetActiveBuildingType(BuildingTypeSO buildingType)
 	{
 		_activeBuildingType = buildingType;
+
+		OnActiveBuildingTypeChanged?.Invoke(this, new OnActiveBuildingTypeChangedEventArgs { activeBuildingType = _activeBuildingType });
 	}
 
 	public BuildingTypeSO GetActiveBuildingType()
@@ -59,12 +69,5 @@ public class BuildingManager : MonoBehaviour
 
 	#region Private Methods
 
-	Vector3 GetMouseWorldPosition()
-	{
-		Vector3 mouseWorldPosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-		mouseWorldPosition.z = 0;
-
-		return mouseWorldPosition;
-	}
 	#endregion
 }

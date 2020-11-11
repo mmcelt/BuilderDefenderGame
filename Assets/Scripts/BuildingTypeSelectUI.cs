@@ -59,8 +59,9 @@ public class BuildingTypeSelectUI : MonoBehaviour
 		}
 	}
 
-	void Update()
+	void Start()
 	{
+		BuildingManager.Instance.OnActiveBuildingTypeChanged += BuildingManager_OnActiveBuildingTypeChanged;
 		UpdateActiveBuildingTypeButton();
 	}
 	#endregion
@@ -88,6 +89,11 @@ public class BuildingTypeSelectUI : MonoBehaviour
 			_arrowButton.Find("Selected").gameObject.SetActive(true);
 		else
 			_btnTransformDict[activeBuildingType].Find("Selected").gameObject.SetActive(true);
+	}
+
+	void BuildingManager_OnActiveBuildingTypeChanged(object sender, BuildingManager.OnActiveBuildingTypeChangedEventArgs e)
+	{
+		UpdateActiveBuildingTypeButton();
 	}
 	#endregion
 }
