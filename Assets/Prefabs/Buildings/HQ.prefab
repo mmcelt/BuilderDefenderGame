@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 793ca27a5a3378149aaa12abe85933f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7030b8e3eb49e8440ae8eb3ec8b45d05, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: -164292189613865775}
   - component: {fileID: 5480551291979345452}
   m_Layer: 0
-  m_Name: Wood Harvester
+  m_Name: HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.070379615, y: -0.19103003}
+  m_Offset: {x: 0, y: -0.46249437}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -154,7 +154,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.9469795, y: 4.2751665}
+  m_Size: {x: 6.386695, y: 4.053973}
   m_EdgeRadius: 0
 --- !u!114 &-164292189613865775
 MonoBehaviour:
@@ -180,4 +180,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beff977fe54900a44a2f68be80caf22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingType: {fileID: 11400000, guid: f582c49244f7a684b818907709a46f10, type: 2}
+  _buildingType: {fileID: 11400000, guid: 847e0cef21b0e854198103cf7d95498f, type: 2}

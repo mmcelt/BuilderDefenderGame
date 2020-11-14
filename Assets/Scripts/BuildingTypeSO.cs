@@ -11,6 +11,7 @@ public class BuildingTypeSO : ScriptableObject
 	public Transform _prefab;
 	public Sprite _sprite;
 	public ResourceGeneratorData _resourceData;
+	public float _minConstructionRadius;
 
 	#endregion
 
