@@ -9,6 +9,8 @@ public class BuildingGhost : MonoBehaviour
 
 	[SerializeField] GameObject _spriteGO;
 
+	[SerializeField] ResourceNearbyOverlay _resourceNearbyOverlay;
+
 	#endregion
 
 	#region MonoBehaviour Methods
@@ -50,9 +52,15 @@ public class BuildingGhost : MonoBehaviour
 	void BuildingManager_OnActiveBuildingTypeChanged(object sender, BuildingManager.OnActiveBuildingTypeChangedEventArgs e)
 	{
 		if (e.activeBuildingType == null)
+		{
 			Hide();
+			_resourceNearbyOverlay.Hide();
+		}
 		else
+		{
 			Show(e.activeBuildingType._sprite);
+			_resourceNearbyOverlay.Show(e.activeBuildingType._resourceData);
+		}
 	}
 	#endregion
 }

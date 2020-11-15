@@ -23,23 +23,24 @@ public class ResourceGenerator : MonoBehaviour
 
 	void Start()
 	{
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _resourceGeneratorData._resourceDetectionRadius);
+		int nearbyResourceAmount = GetNearbyResourceAmount(_resourceGeneratorData, transform.position);
+		//Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _resourceGeneratorData._resourceDetectionRadius);
 
-		int nearbyResourceAmount = 0;
-		foreach (Collider2D collider in colliders)
-		{
-			ResourceNode resourceNode = collider.GetComponent<ResourceNode>();
-			if (resourceNode != null)  //it's a resource node...
-			{
-				//it's the correct type...
-				if (resourceNode._resourceType == _resourceGeneratorData._resourceType)
-				{
-					nearbyResourceAmount++;
-				}
-			}
-		}
+		//int nearbyResourceAmount = 0;
+		//foreach (Collider2D collider in colliders)
+		//{
+		//	ResourceNode resourceNode = collider.GetComponent<ResourceNode>();
+		//	if (resourceNode != null)  //it's a resource node...
+		//	{
+		//		//it's the correct type...
+		//		if (resourceNode._resourceType == _resourceGeneratorData._resourceType)
+		//		{
+		//			nearbyResourceAmount++;
+		//		}
+		//	}
+		//}
 
-		nearbyResourceAmount = Mathf.Clamp(nearbyResourceAmount, 0, _resourceGeneratorData._maxResourceAmount);
+		//nearbyResourceAmount = Mathf.Clamp(nearbyResourceAmount, 0, _resourceGeneratorData._maxResourceAmount);
 
 		if (nearbyResourceAmount == 0)
 		{
@@ -68,7 +69,43 @@ public class ResourceGenerator : MonoBehaviour
 
 	#region Public Methods
 
+	public ResourceGeneratorData GetResourceGeneratorData()
+	{
+		return _resourceGeneratorData;
+	}
 
+	public float GetTimerNormalized()
+	{
+		return _timer / _timerMax;
+	}
+
+	public float GetResourceAmountGeneratedPerSecond()
+	{
+		return 1 / _timerMax;
+	}
+
+	public static int GetNearbyResourceAmount(ResourceGeneratorData resourceGeneratorData, Vector3 position)
+	{
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(position, resourceGeneratorData._resourceDetectionRadius);
+
+		int nearbyResourceAmount = 0;
+		foreach (Collider2D collider in colliders)
+		{
+			ResourceNode resourceNode = collider.GetComponent<ResourceNode>();
+			if (resourceNode != null)  //it's a resource node...
+			{
+				//it's the correct type...
+				if (resourceNode._resourceType == resourceGeneratorData._resourceType)
+				{
+					nearbyResourceAmount++;
+				}
+			}
+		}
+
+		nearbyResourceAmount = Mathf.Clamp(nearbyResourceAmount, 0, resourceGeneratorData._maxResourceAmount);
+
+		return nearbyResourceAmount;
+	}
 	#endregion
 
 	#region Private Methods
