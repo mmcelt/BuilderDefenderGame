@@ -12,16 +12,7 @@ public class BuildingTypeSO : ScriptableObject
 	public Sprite _sprite;
 	public ResourceGeneratorData _resourceData;
 	public float _minConstructionRadius;
-
-	#endregion
-
-	#region Public Methods
-
-
-	#endregion
-
-	#region Private Methods
-
+	public ResourceAmount[] _constructionResourceCostArray;
 
 	#endregion
 }

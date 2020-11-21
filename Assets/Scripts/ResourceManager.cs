@@ -64,6 +64,32 @@ public class ResourceManager : MonoBehaviour
 	{
 		return _resourceAmountDict[resourceType];
 	}
+
+	public bool CanAfford(ResourceAmount[] resourceAmounts)
+	{
+		foreach (ResourceAmount resourceAmount in resourceAmounts)
+		{
+			if (GetResourceAmount(resourceAmount._resourceType) >= resourceAmount._amount)
+			{
+				//can afford this resource...
+			}
+			else
+			{
+				//can't afford this...
+				return false;
+			}
+		}
+		//can afford all...
+		return true;
+	}
+
+	public void SpendResources(ResourceAmount[] resourceAmounts)
+	{
+		foreach (ResourceAmount resourceAmount in resourceAmounts)
+		{
+			_resourceAmountDict[resourceAmount._resourceType] -= resourceAmount._amount;
+		}
+	}
 	#endregion
 
 	#region Private Methods
