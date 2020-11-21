@@ -15,4 +15,18 @@ public class BuildingTypeSO : ScriptableObject
 	public ResourceAmount[] _constructionResourceCostArray;
 
 	#endregion
+
+	#region Public Methods
+
+	public string GetConstructionResourceCostString()
+	{
+		string str = "";
+		foreach(ResourceAmount resourceAmount in _constructionResourceCostArray)
+		{
+			str += "<color=#" + resourceAmount._resourceType._colorHex + ">" + resourceAmount._resourceType._nameShort + resourceAmount._amount + "</color> ";
+		}
+
+		return str;
+	}
+	#endregion
 }
